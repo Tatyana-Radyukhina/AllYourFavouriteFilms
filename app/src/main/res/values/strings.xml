@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AllYourFavouriteFilms</string>
+    <string name="button1">Меню</string>
+    <string name="button2">Избранное</string>
+    <string name="button3">Посмотреть позже</string>
+    <string name="button4">Подборки</string>
+    <string name="button5">Прочее</string>
+    <string name="menu_settings_title">Settings</string>
+    <string name="page_title">Search it!</string>
+</resources>
