@@ -8,12 +8,15 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        val film = intent.extras?.get("film") as Film
-        //Устанавливаем заголовок
-        details_toolbar.title = film.title
+
+        val film:Film? = intent.extras?.getParcelable("film") as? Film
+        if (film is Film) {
+            //Устанавливаем заголовок
+            details_toolbar.title = film.title
 //Устанавливаем картинку
-        details_poster.setImageResource(film.poster)
+            details_poster.setImageResource(film.poster)
 //Устанавливаем описание
-        details_description.text = film.description
+            details_description.text = film.description
+        }
     }
 }

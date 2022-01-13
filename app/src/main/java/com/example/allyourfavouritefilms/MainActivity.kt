@@ -112,8 +112,10 @@ class MainActivity : AppCompatActivity() {
             //оставим его пока пустым, он нам понадобится во второй части задания
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {//Запускаем наше активити
-                    val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-                    startActivity(intent)}
+                    val intent = Intent(this@MainActivity, DetailsActivity::class.java).apply {
+                        startActivity(this)
+                    }
+                }
             })
             //Присваиваем адаптер
             adapter = filmsAdapter
