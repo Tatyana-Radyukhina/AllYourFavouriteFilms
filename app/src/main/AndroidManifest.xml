@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AllYourFavouriteFilms">
         <activity
-            android:name=".DetailsActivity"
-            android:exported="true" />
+            android:name=".DetailsFragment"
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
