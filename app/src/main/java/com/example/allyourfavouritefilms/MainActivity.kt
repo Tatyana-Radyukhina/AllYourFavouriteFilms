@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //initNavigation()
+        initNavigation()
 
         //Запускаем фрагмент при старте
         supportFragmentManager
@@ -24,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
-
     }
 
     fun launchDetailsFragment(film: Film) {
@@ -65,6 +67,34 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val count = supportFragmentManager.backStackEntryCount
+        if (count == 0){
+        AlertDialog.Builder(this)
+            .setTitle("Вы хотите выйти?")
+            .setIcon(R.drawable.ic_baseline_photo_library_24)
+            .setPositiveButton("Да") { _, _ ->
+                finish()
+            }
+            .setNegativeButton("Нет") { _, _ ->
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragment_placeholder, HomeFragment())
+                    .addToBackStack(null)
+                    .commit()}
+            .setNeutralButton("Не знаю") { _, _ ->
+                Toast.makeText(this, "Решайся", Toast.LENGTH_SHORT).show()
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragment_placeholder, HomeFragment())
+                    .addToBackStack(null)
+                    .commit()}
+
+            .show()}
+        else return
     }
 }
 

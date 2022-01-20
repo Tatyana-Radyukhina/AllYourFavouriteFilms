@@ -12,7 +12,9 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    val filmsDataBase = listOf(
+    private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
+    private val filmsDataBase = listOf(
         Film(
             "The day after tomorrow",
             R.drawable.thedayaftertomorrow,
@@ -54,8 +56,6 @@ class HomeFragment : Fragment() {
             "Newlyweds are terrorized by demonic forces after moving into a large house that was the site of a grisly mass murder a year before."
         )
     )
-
-    lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
