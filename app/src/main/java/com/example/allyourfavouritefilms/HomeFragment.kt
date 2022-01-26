@@ -18,6 +18,7 @@ class HomeFragment : Fragment() {
         Film(
             "The day after tomorrow",
             R.drawable.thedayaftertomorrow,
+
             "Jack Hall, paleoclimatologist, must make a daring trek from Washington, D.C. to New York City to reach his son, trapped in the cross-hairs of a sudden international storm which plunges the planet into a new Ice Age."
         ),
         Film(
@@ -78,7 +79,7 @@ class HomeFragment : Fragment() {
             })
             //Присваиваем адаптер
             adapter = filmsAdapter
-            //Присвои layoutmanager
+            //Присвоим layoutmanager
             layoutManager = LinearLayoutManager(requireContext())
             //Применяем декоратор для отступов
             val decorator = TopSpacingItemDecoration(8)

@@ -15,6 +15,10 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var film: Film
+
+    val fragment1 = FavoritesFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,13 +51,31 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+   fun launchFavoritesFragment(film: Film) {
+        //Создаем "посылку"
+        val bundle = Bundle()
+        //Кладем наш фильм в "посылку"
+        bundle.putParcelable("film", film)
+        //Кладем фрагмент с деталями в перменную
+        val fragment1 = FavoritesFragment()
+        //Прикрепляем нашу "посылку" к фрагменту
+        fragment1.arguments = bundle
+    }
+
     private fun initNavigation() {
 
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, fragment1)
+                        .addToBackStack(null)
+                        .commit()
+
+
                     true
                 }
                 R.id.watch_later -> {
