@@ -3,10 +3,13 @@ package com.example.allyourfavouritefilms
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,10 +17,6 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var film: Film
-
-    val fragment1 = FavoritesFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+
 
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
@@ -51,17 +51,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-   fun launchFavoritesFragment(film: Film) {
-        //Создаем "посылку"
-        val bundle = Bundle()
-        //Кладем наш фильм в "посылку"
-        bundle.putParcelable("film", film)
-        //Кладем фрагмент с деталями в перменную
-        val fragment1 = FavoritesFragment()
-        //Прикрепляем нашу "посылку" к фрагменту
-        fragment1.arguments = bundle
-    }
-
     private fun initNavigation() {
 
         bottom_navigation.setOnNavigationItemSelectedListener {
@@ -71,11 +60,9 @@ class MainActivity : AppCompatActivity() {
 
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragment_placeholder, fragment1)
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
                         .addToBackStack(null)
                         .commit()
-
-
                     true
                 }
                 R.id.watch_later -> {

@@ -58,7 +58,7 @@ class DetailsFragment : Fragment() {
 
     private fun setFilmsDetails() {
         //Получаем наш фильм из переданного бандла
-        val film:Film = arguments?.getParcelable<Film>("film") as Film
+        film = arguments?.get("film") as Film
 
         //Устанавливаем заголовок
         details_toolbar.title = film.title

@@ -10,11 +10,8 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment: Fragment() {
-    private lateinit var film: Film
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-
-    /*var favoritesList: List<Film> = listOf()*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,18 +24,17 @@ class FavoritesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        favoritesFragment()
-
         //Получаем список при транзакции фрагмента
-        var favoritesList: List<Film> = listOf()
+        val favoritesList: List<Film> = emptyList()
 
         favorites_recycler
             .apply {
-                filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                    override fun click(film: Film) {
-                            (requireActivity() as MainActivity).launchFavoritesFragment(film)
-                    }
-                })
+                filmsAdapter =
+                    FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
+                        override fun click(film: Film) {
+                            (requireActivity() as MainActivity).launchDetailsFragment(film)
+                        }
+                    })
                 //Присваиваем адаптер
                 adapter = filmsAdapter
 
@@ -51,21 +47,6 @@ class FavoritesFragment: Fragment() {
             }
 
         //Кладем нашу БД в RV
-        if (film.isInFavorites) {
-            filmsAdapter.addItems(favoritesList)
-            }
-        }
-
-        fun favoritesFragment(){
-            val film:Film = arguments?.getParcelable<Film>("film") as Film
-
-        //Устанавливаем заголовок
-        details_toolbar.title = film.title
-        //Устанавливаем картинку
-        details_poster.setImageResource(film.poster)
-        //Устанавливаем описание
-        details_description.text = film.description
+        filmsAdapter.addItems(favoritesList)
     }
-
-
 }
