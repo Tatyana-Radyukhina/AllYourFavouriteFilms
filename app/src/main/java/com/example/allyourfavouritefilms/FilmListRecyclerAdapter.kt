@@ -58,4 +58,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):Re
     interface OnItemClickListener {
         fun click(film: Film)
     }
+
+
+
 }
