@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/background_favorites.xml" value="0.15677083333333333" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/corner_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/ic_baseline_favorite_border.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.14635416666666667" />
@@ -11,12 +12,23 @@
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/ic_round_menu.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/ic_round_schedule.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/shape.xml" value="0.17314814814814813" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/shape1.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/shape2.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/shape3.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/shape4.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/drawable/shape5.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/activity_details.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/film_item.xml" value="0.16032608695652173" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_blank.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_blank2.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_details.xml" value="0.25" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_favorites.xml" value="0.1160081053698075" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_selections.xml" value="0.13858695652173914" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/fragment_watchlater.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/merge_home_screen_content.xml" value="0.1721014492753623" />
+        <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/layout/watch_later.xml" value="0.13858695652173914" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/menu/navigation.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/menu/search_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tarad/AndroidStudioProjects/AllYourFavouriteFilms3/app/src/main/res/menu/settings.xml" value="0.25416666666666665" />
