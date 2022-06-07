@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.example.allyourfavouritefilms.databinding.FragmentHomeBinding
 import java.util.*
 
 class HomeFragment : Fragment() {
+
+    private lateinit var binding: FragmentHomeBinding
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
@@ -68,17 +69,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ): View? {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
         //Подключаем слушателя изменений введенного текста в поиска
-        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -104,7 +106,7 @@ class HomeFragment : Fragment() {
             }
         })
             //находим наш RV
-            main_recycler.apply {
+            binding.mainRecycler.apply {
 
                 filmsAdapter =
                     FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {

@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.film_item.view.*
+import com.example.allyourfavouritefilms.databinding.ActivityMainBinding
+import com.example.allyourfavouritefilms.databinding.FilmItemBinding
+import com.example.allyourfavouritefilms.databinding.FragmentHomeBinding
 
 
 //СОЗДАЁМ АДАПТЕР РЕСАЙКЛЕРА
@@ -14,19 +17,27 @@ import kotlinx.android.synthetic.main.film_item.view.*
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса Activity
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    class ViewHolder(var binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root)
+
     //Здесь у нас хранится список элементов для RV
     private val items = mutableListOf<Film>()
 
     //Этот метод нужно переопределить на возврат количества элементов в списке RV
     override fun getItemCount() = items.size
 
+
     //В этом методе мы привязываем наш ViewHolder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))
+        /*return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))*/
+        val inflater = LayoutInflater.from(parent.context)
+        return ViewHolder(DataBindingUtil.inflate(inflater, R.layout.film_item, parent, false))
     }
+
 
     //В этом методе будет привязка полей из объекта Film к View из film_item.xml
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+
         //Проверяем, какой у нас ViewHolder
         when (holder) {
             is FilmViewHolder -> {
@@ -40,25 +51,23 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):Re
                     clickListener.click(items[position])
                 }
             }
+            }
         }
-    }
 
-    //Метод для добавления объектов в наш список
-    fun addItems(list: List<Film>) {
-        //Сначала очищаем(если не реализовать DiffUtils)
-        items.clear()
-        //Добавляем
-        items.addAll(list)
-        //Уведомляем RV, что пришел новый список, и ему нужно заново все "привязывать"
-        notifyDataSetChanged()
-    }
+        //Метод для добавления объектов в наш список
+        fun addItems(list: List<Film>) {
+            //Сначала очищаем(если не реализовать DiffUtils)
+            items.clear()
+            //Добавляем
+            items.addAll(list)
+            //Уведомляем RV, что пришел новый список, и ему нужно заново все "привязывать"
+            notifyDataSetChanged()
+        }
 
 
-    //Интерфейс для обработки кликов
+        //Интерфейс для обработки кликов
     interface OnItemClickListener {
         fun click(film: Film)
     }
+    }
 
-
-
-}

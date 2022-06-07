@@ -3,6 +3,7 @@ package com.example.allyourfavouritefilms
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,15 +14,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.example.allyourfavouritefilms.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //Инициализируем объект
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        //Передаем его в метод
+        setContentView(binding.root)
+        /*supportFragmentManager.beginTransaction().replace(binding.root.id, HomeFragment()).commit()*/
 
         initNavigation()
 
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
 
-        bottom_navigation.setOnNavigationItemSelectedListener {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.home -> { val tag = "home"
