@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

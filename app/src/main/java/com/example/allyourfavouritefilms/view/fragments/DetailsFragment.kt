@@ -1,30 +1,28 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.fragments
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.allyourfavouritefilms.R
 import com.example.allyourfavouritefilms.databinding.FragmentDetailsBinding
+import com.example.allyourfavouritefilms.domain.Film
 
 
 class DetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentDetailsBinding
-
     private lateinit var film: Film
+
+    private lateinit var binding: FragmentDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,15 +1,11 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.RVadapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
-import androidx.core.content.ContextCompat.startActivity
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allyourfavouritefilms.databinding.ActivityMainBinding
+import com.bumptech.glide.Glide
 import com.example.allyourfavouritefilms.databinding.FilmItemBinding
-import com.example.allyourfavouritefilms.databinding.FragmentHomeBinding
+import com.example.allyourfavouritefilms.domain.Film
 
 
 //СОЗДАЁМ АДАПТЕР РЕСАЙКЛЕРА
@@ -17,7 +13,33 @@ import com.example.allyourfavouritefilms.databinding.FragmentHomeBinding
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса Activity
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class ViewHolder(var binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class FilmViewHolder(val binding: FilmItemBinding): RecyclerView.ViewHolder(binding.root)
+
+
+    {
+        //Привязываем View из layout к переменным
+        private val title = binding.title
+        private val poster = binding.poster
+        private val description = binding.description
+
+        //В этом методе кладем данные из Film в наши View
+        fun bind(film: Film) {
+            //Устанавливаем заголовок
+            title.text = film.title
+            //Устанавливаем постер
+            //Указываем контейнер, в которм будет "жить" наша картинка
+            Glide.with(itemView)
+                //Загружаем сам ресурс
+                .load(film.poster)
+                //Центруем изображение
+                .centerCrop()
+                //Указываем ImageView, куда будем загружать изображение
+                .into(poster)
+            //Устанавливаем описание
+            description.text = film.description
+        }
+
+    }
 
     //Здесь у нас хранится список элементов для RV
     private val items = mutableListOf<Film>()
@@ -28,9 +50,9 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):Re
 
     //В этом методе мы привязываем наш ViewHolder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        /*return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))*/
-        val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(DataBindingUtil.inflate(inflater, R.layout.film_item, parent, false))
+        val binding =
+            FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FilmViewHolder(binding)
     }
 
 
@@ -47,7 +69,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):Re
                 //Обрабатываем нажатие на весь элемент целиком(можно сделать на отдельный элемент
                 //например, картинку) и вызываем метод нашего листенера, который мы получаем из
                 //конструктора адаптера
-                holder.itemView.item_container.setOnClickListener {
+                holder.binding.itemContainer.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }

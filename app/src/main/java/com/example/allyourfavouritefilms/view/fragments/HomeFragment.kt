@@ -1,17 +1,21 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.transition.Scene
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.transition.TransitionSet
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.allyourfavouritefilms.view.RVadapter.FilmListRecyclerAdapter
+import com.example.allyourfavouritefilms.view.MainActivity
+import com.example.allyourfavouritefilms.R
+import com.example.allyourfavouritefilms.view.RVadapter.TopSpacingItemDecoration
 import com.example.allyourfavouritefilms.databinding.FragmentHomeBinding
+import com.example.allyourfavouritefilms.domain.Film
+import com.example.allyourfavouritefilms.utils.AnimationHelper
+import com.example.allyourfavouritefilms.viewModel.HomeFragmentViewModel
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -20,49 +24,20 @@ class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
-    private val filmsDataBase = listOf(
-        Film(
-            "The day after tomorrow",
-            R.drawable.thedayaftertomorrow,
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+    }
 
-            "Jack Hall, paleoclimatologist, must make a daring trek from Washington, D.C. to New York City to reach his son, trapped in the cross-hairs of a sudden international storm which plunges the planet into a new Ice Age."
-        ),
-        Film(
-            "Marley & Me",
-            R.drawable.marly,
-            "A family learns important life lessons from their adorable, but naughty and neurotic dog."
-        ),
-        Film(
-            "What Happens in Vegas",
-            R.drawable.vegas,
-            "A man and a woman are compelled, for legal reasons, to live life as a couple for a limited period of time. At stake is a large amount of money."
-        ),
-        Film(
-            "The Hangover",
-            R.drawable.vegas_2,
-            "Three buddies wake up from a bachelor party in Las Vegas, with no memory of the previous night and the bachelor missing. They make their way around the city in order to find their friend before his wedding."
-        ),
-        Film(
-            "Venom: Let There Be Carnage",
-            R.drawable.venom,
-            "Eddie Brock attempts to reignite his career by interviewing serial killer Cletus Kasady, who becomes the host of the symbiote Carnage and escapes prison after a failed execution."
-        ),
-        Film(
-            "In the Heart of the Sea",
-            R.drawable.img,
-            "A recounting of a New England whaling ship's sinking by a giant whale in 1820, an experience that later inspired the great novel Moby-Dick."
-        ),
-        Film(
-            "The Devil Wears Prada",
-            R.drawable.devilwearsprada,
-            "A smart but sensible new graduate lands a job as an assistant to Miranda Priestly, the demanding editor-in-chief of a high fashion magazine."
-        ),
-        Film(
-            "The Amityville Horror",
-            R.drawable.amitivillie,
-            "Newlyweds are terrorized by demonic forces after moving into a large house that was the site of a grisly mass murder a year before."
-        )
-    )
+    private var filmsDataBase = listOf<Film>()
+        //Используем backing field
+        set(value) {
+            //Если придет такое же значение, то мы выходим из метода
+            if (field == value) return
+            //Если пришло другое значение, то кладем его в переменную
+            field = value
+            //Обновляем RV адаптер
+            filmsAdapter.addItems(field)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,8 +52,24 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            binding.homeFragmentRoot,
+            requireActivity(),
+            1
+        )
 
+        initSearchView()
+
+        //находим наш RV
+        initRecycler()
+        //Кладем нашу БД в RV
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+            filmsDataBase = it
+        })
+
+    }
+
+    private fun initSearchView() {
         //Подключаем слушателя изменений введенного текста в поиска
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
@@ -105,6 +96,11 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
+
+    }
+
+
+        private fun initRecycler() {
             //находим наш RV
             binding.mainRecycler.apply {
 
@@ -122,9 +118,10 @@ class HomeFragment : Fragment() {
                 val decorator = TopSpacingItemDecoration(8)
                 addItemDecoration(decorator)
             }
-//Кладем нашу БД в RV
-            filmsAdapter.addItems(filmsDataBase)
         }
+//Кладем нашу БД в RV
+        /*filmsAdapter.addItems(filmsDataBase)*/
+
 }
 
 

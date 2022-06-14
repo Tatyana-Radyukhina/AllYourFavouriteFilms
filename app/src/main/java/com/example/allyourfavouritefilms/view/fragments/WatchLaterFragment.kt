@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.allyourfavouritefilms.databinding.FragmentWatchlaterBinding
+import com.example.allyourfavouritefilms.utils.AnimationHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

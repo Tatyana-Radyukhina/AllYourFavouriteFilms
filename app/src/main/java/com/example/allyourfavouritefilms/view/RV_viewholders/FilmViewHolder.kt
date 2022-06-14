@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.RV_viewholders
 
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +18,7 @@ import com.example.allyourfavouritefilms.databinding.FragmentWatchlaterBinding
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
 
-class FilmViewHolder(var binding: FilmItemBinding, private val itemView: View): RecyclerView.ViewHolder(itemView)
+/*class FilmViewHolder(/*var binding: FilmItemBinding,*/ private val itemView: View): RecyclerView.ViewHolder(itemView)
 
 
 {
@@ -44,4 +44,4 @@ class FilmViewHolder(var binding: FilmItemBinding, private val itemView: View): 
         description.text = film.description
     }
 
-}
+}*/

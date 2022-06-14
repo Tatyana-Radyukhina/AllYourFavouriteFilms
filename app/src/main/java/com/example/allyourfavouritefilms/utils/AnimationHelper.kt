@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.utils
 
 import android.app.Activity
 import android.view.View
