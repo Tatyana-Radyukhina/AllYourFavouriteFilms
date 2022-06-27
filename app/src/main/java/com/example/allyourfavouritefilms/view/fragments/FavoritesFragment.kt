@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.fragment_favorites.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.example.allyourfavouritefilms.view.RVadapter.FilmListRecyclerAdapter
+import com.example.allyourfavouritefilms.view.MainActivity
+import com.example.allyourfavouritefilms.view.RVadapter.TopSpacingItemDecoration
+import com.example.allyourfavouritefilms.databinding.FragmentFavoritesBinding
+import com.example.allyourfavouritefilms.domain.Film
+import com.example.allyourfavouritefilms.utils.AnimationHelper
 
 class FavoritesFragment: Fragment() {
+
+    private lateinit var binding: FragmentFavoritesBinding
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
@@ -18,19 +23,20 @@ class FavoritesFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(), 1)
 
         //Получаем список при транзакции фрагмента
         val favoritesList: List<Film> = emptyList()
 
-        favorites_recycler
+        binding.favoritesRecycler
             .apply {
                 filmsAdapter =
                     FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {

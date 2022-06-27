@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.RVadapter
 
 import android.content.res.Resources
 import android.graphics.Rect

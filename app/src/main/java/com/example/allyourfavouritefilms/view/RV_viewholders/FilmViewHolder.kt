@@ -1,9 +1,13 @@
-package com.example.allyourfavouritefilms
+package com.example.allyourfavouritefilms.view.RV_viewholders
 
+import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.film_item.view.*
+import com.example.allyourfavouritefilms.databinding.FilmItemBinding
+import com.example.allyourfavouritefilms.databinding.FragmentWatchlaterBinding
+
+/*import kotlinx.android.synthetic.main.film_item.view.**/
 
 //ViewHolder предоставляет визуальную часть элемента списка — то, как он будет отрисовываться.
 //Этот класс является обёрткой над View, а View является элементом списка.
@@ -13,11 +17,15 @@ import kotlinx.android.synthetic.main.film_item.view.*
 // Также можно написать функции для анимирования этого элемента списка или обработать события пользовательского ввода.
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
-class FilmViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+/*class FilmViewHolder(/*var binding: FilmItemBinding,*/ private val itemView: View): RecyclerView.ViewHolder(itemView)
+
+
+{
     //Привязываем View из layout к переменным
-    private val title = itemView.title
-    private val poster = itemView.poster
-    private val description = itemView.description
+    private val title = binding.title
+    private val poster = binding.poster
+    private val description = binding.description
 
     //В этом методе кладем данные из Film в наши View
     fun bind(film: Film) {
@@ -36,4 +44,4 @@ class FilmViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemV
         description.text = film.description
     }
 
-}
+}*/
