@@ -5,17 +5,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.example.allyourfavouritefilms.API
 import com.example.allyourfavouritefilms.R
 import com.example.allyourfavouritefilms.databinding.ActivityMainBinding
 import com.example.allyourfavouritefilms.domain.Film
 import com.example.allyourfavouritefilms.view.fragments.*
-import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
-import java.util.concurrent.Executors
-import javax.net.ssl.HttpsURLConnection
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         //Передаем его в метод
         setContentView(binding.root)
         /*supportFragmentManager.beginTransaction().replace(binding.root.id, HomeFragment()).commit()*/
-
-        println(API.key)
 
         initNavigation()
 

@@ -2,10 +2,25 @@
 
 <!--этот XML файл создаётся для каждого элемента списка, в нашем случае - для каждого фильма-->
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <com.example.allyourfavouritefilms.view.customviews.RatingDonutView
+        android:id="@+id/rating_donut"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:translationZ="11dp"
+        app:stroke="10"
+        app:progress="77"
+        android:layout_gravity="bottom|start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -50,3 +65,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+</FrameLayout>
