@@ -9,11 +9,19 @@ import com.example.allyourfavouritefilms.domain.Interactor
 class HomeFragmentViewModel: ViewModel() {
     val filmsListLiveData = MutableLiveData<List<Film>>()
     private var interactor: Interactor = App.instance.interactor
-    init{
+    init {
+        interactor.getFilmsFromApi(1, object : ApiCallback {
+            override fun onSuccess(films: List<Film>) {
+                filmsListLiveData.postValue(films)
+            }
 
-        //TODO init interactor
+            override fun onFailure() {
+            }
+        })
+    }
 
-        val films = interactor.getFilmsDB()
-        filmsListLiveData.postValue(films)
+    interface ApiCallback {
+        fun onSuccess(films: List<Film>)
+        fun onFailure()
     }
 }

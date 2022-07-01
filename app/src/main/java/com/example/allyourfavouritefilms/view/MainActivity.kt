@@ -9,6 +9,11 @@ import com.example.allyourfavouritefilms.R
 import com.example.allyourfavouritefilms.databinding.ActivityMainBinding
 import com.example.allyourfavouritefilms.domain.Film
 import com.example.allyourfavouritefilms.view.fragments.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-
 
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"

@@ -24,10 +24,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
-    private val viewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+    private val viewModel: HomeFragmentViewModel by lazy {
+        ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
     }
-
     private var filmsDataBase = listOf<Film>()
         //Используем backing field
         set(value) {
@@ -63,9 +62,9 @@ class HomeFragment : Fragment() {
         //находим наш RV
         initRecycler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
             filmsDataBase = it
-        })
+        }
 
     }
 
