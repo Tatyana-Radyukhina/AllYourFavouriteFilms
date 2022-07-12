@@ -8,20 +8,15 @@ import android.view.ViewGroup
 import com.example.allyourfavouritefilms.databinding.FragmentWatchlaterBinding
 import com.example.allyourfavouritefilms.utils.AnimationHelper
 
-// TODO: Rename parameter arguments, choose names that match
+/*// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM2 = "param2"*/
 
 
 class WatchLaterFragment : Fragment() {
 
     private lateinit var binding: FragmentWatchlaterBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

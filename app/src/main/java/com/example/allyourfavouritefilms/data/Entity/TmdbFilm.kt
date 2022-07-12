@@ -2,6 +2,7 @@ package com.example.allyourfavouritefilms.data.Entity
 
 import com.google.gson.annotations.SerializedName
 
+
 data class TmdbFilm(
     @SerializedName("adult")
     val adult: Boolean,
