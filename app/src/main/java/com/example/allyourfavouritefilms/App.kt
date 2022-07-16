@@ -1,6 +1,9 @@
 package com.example.allyourfavouritefilms
 
 import android.app.Application
+import com.example.allyourfavouritefilms.DI.AppComponent
+import com.example.allyourfavouritefilms.DI.DaggerAppComponent
+
 import com.example.allyourfavouritefilms.data.ApiConstants
 import com.example.allyourfavouritefilms.data.MainRepository
 import com.example.allyourfavouritefilms.data.TmdbApi
@@ -12,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class App : Application() {
-    lateinit var repo: MainRepository
+    /*lateinit var repo: MainRepository
     lateinit var interactor: Interactor
     lateinit var retrofitService: TmdbApi
 
@@ -58,5 +61,21 @@ class App : Application() {
         lateinit var instance: App
             //Приватный сеттер, чтобы нельзя было в эту переменную присвоить что-либо другое
             private set
+
+    }*/
+    lateinit var dagger: AppComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+        //Создаем компонент
+        dagger = DaggerAppComponent.create()
+    }
+
+    companion object {
+        lateinit var instance: App
+            private set
     }
 }
+
+
