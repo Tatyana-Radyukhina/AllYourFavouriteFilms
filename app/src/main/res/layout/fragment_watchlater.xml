@@ -7,7 +7,7 @@
     android:visibility="invisible"
     tools:visibility="visible"
     android:background="@drawable/background_watchlater"
-    tools:context=".WatchLaterFragment">
+    tools:context=".view.fragments.WatchLaterFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

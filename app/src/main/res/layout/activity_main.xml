@@ -38,6 +38,7 @@
         app:menu="@menu/navigation" />
 
 
+
     <FrameLayout
         android:id="@+id/fragment_placeholder"
         android:layout_width="match_parent"

@@ -24,7 +24,7 @@ class FavoritesFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
+
         return binding.root
     }
 
@@ -33,7 +33,7 @@ class FavoritesFragment: Fragment() {
 
         AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(), 1)
 
-        //Получаем список при транзакции фрагмента
+
         val favoritesList: List<Film> = emptyList()
 
         binding.favoritesRecycler
@@ -44,13 +44,13 @@ class FavoritesFragment: Fragment() {
                             (requireActivity() as MainActivity).launchDetailsFragment(film)
                         }
                     })
-                //Присваиваем адаптер
+
                 adapter = filmsAdapter
 
-                //Присвоим layoutmanager
+
                 layoutManager = LinearLayoutManager(requireContext())
 
-                //Применяем декоратор для отступов
+
                 val decorator = TopSpacingItemDecoration(8)
                 addItemDecoration(decorator)
             }

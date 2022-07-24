@@ -43,35 +43,35 @@ class DetailsFragment : Fragment() {
         }
 
         binding.detailsFabShare.setOnClickListener {
-            //Создаем интент
+
             val intent = Intent()
-            //Указываем action с которым он запускается
+
             intent.action = Intent.ACTION_SEND
-            //Кладем данные о нашем фильме
+
             intent.putExtra(
                 Intent.EXTRA_TEXT,
                 "Check out this film: ${film.title} \n\n ${film.description}"
             )
-            //Указываем MIME тип, чтобы система знала, какое приложения предложить
+
             intent.type = "text/plain"
-            //Запускаем наше активити
+
             startActivity(Intent.createChooser(intent, "Share To:"))
         }
 
     }
 
     private fun setFilmsDetails() {
-        //Получаем наш фильм из переданного бандла
+
         film = arguments?.get("film") as Film
 
-        //Устанавливаем заголовок
+
         binding.detailsToolbar.title = film.title
-        //Устанавливаем картинку
+
         Glide.with(this)
             .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
             .centerCrop()
             .into(binding.detailsPoster)
-        //Устанавливаем описание
+
         binding.detailsDescription.text = film.description
 
         binding.detailsFabFavorites.setImageResource(

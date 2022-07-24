@@ -21,15 +21,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Инициализируем объект
+
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //Передаем его в метод
+
         setContentView(binding.root)
-        /*supportFragmentManager.beginTransaction().replace(binding.root.id, HomeFragment()).commit()*/
+
 
         initNavigation()
 
-        //Запускаем фрагмент при старте
+
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
@@ -38,16 +38,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun launchDetailsFragment(film: Film) {
-        //Создаем "посылку"
+
         val bundle = Bundle()
-        //Кладем наш фильм в "посылку"
+
         bundle.putParcelable("film", film)
-        //Кладем фрагмент с деталями в перменную
+
         val fragment = DetailsFragment()
-        //Прикрепляем нашу "посылку" к фрагменту
+
         fragment.arguments = bundle
 
-        //Запускаем фрагмент
+
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_placeholder, fragment)
@@ -62,8 +62,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home -> { val tag = "home"
                     val fragment = checkFragmentExistence(tag)
-                    //В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
-                    //элвиса мы вызываем создание нового фрагмента
+
                     changeFragment( fragment?: HomeFragment(), tag)
                     true
                 }
@@ -84,6 +83,12 @@ class MainActivity : AppCompatActivity() {
                     val tag = "selections"
                     val fragment = checkFragmentExistence(tag)
                     changeFragment( fragment?: SelectionsFragment(), tag)
+                    true
+                }
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SettingsFragment(), tag)
                     true
                 }
 
@@ -121,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         else return
     }
 
-    //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null
+
     private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
 
     private fun changeFragment(fragment: Fragment, tag: String) {

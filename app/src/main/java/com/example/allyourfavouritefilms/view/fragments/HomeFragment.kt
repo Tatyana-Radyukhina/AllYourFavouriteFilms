@@ -41,6 +41,11 @@ class HomeFragment : Fragment() {
             filmsAdapter.addItems(field)
         }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,14 +66,28 @@ class HomeFragment : Fragment() {
         )
 
         initSearchView()
+        initPullToRefresh()
 
         //находим наш RV
         initRecycler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
             filmsDataBase = it
-        })
+            filmsAdapter.addItems(it)
+        }
 
+    }
+
+    private fun initPullToRefresh() {
+        //Вешаем слушатель, чтобы вызвался pull to refresh
+        binding.pullToRefresh.setOnRefreshListener {
+            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+            filmsAdapter.items.clear()
+            //Делаем новый запрос фильмов на сервер
+            viewModel.getFilms()
+            //Убираем крутящиеся колечко
+            binding.pullToRefresh.isRefreshing = false
+        }
     }
 
     private fun initSearchView() {
@@ -102,29 +121,26 @@ class HomeFragment : Fragment() {
     }
 
 
-        private fun initRecycler() {
-            //находим наш RV
-            binding.mainRecycler.apply {
+    private fun initRecycler() {
+        //находим наш RV
+        binding.mainRecycler.apply {
 
-                filmsAdapter =
-                    FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
-                        override fun click(film: Film) {
-                            (requireActivity() as MainActivity).launchDetailsFragment(film)
-                        }
-                    })
-                //Присваиваем адаптер
-                adapter = filmsAdapter
-                //Присвои layoutmanager
-                layoutManager = LinearLayoutManager(requireContext())
-                //Применяем декоратор для отступов
-                val decorator = TopSpacingItemDecoration(8)
-                addItemDecoration(decorator)
-            }
+            filmsAdapter =
+                FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
+                    override fun click(film: Film) {
+                        (requireActivity() as MainActivity).launchDetailsFragment(film)
+                    }
+                })
+            //Присваиваем адаптер
+            adapter = filmsAdapter
+            //Присвои layoutmanager
+            layoutManager = LinearLayoutManager(requireContext())
+            //Применяем декоратор для отступов
+            val decorator = TopSpacingItemDecoration(8)
+            addItemDecoration(decorator)
         }
+    }
 //Кладем нашу БД в RV
-        /*filmsAdapter.addItems(filmsDataBase)*/
+    /*filmsAdapter.addItems(filmsDataBase)*/
 
 }
-
-
-

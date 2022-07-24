@@ -1,4 +1,4 @@
-package com.example.allyourfavouritefilms.DI.modules
+package com.example.allyourfavouritefilms.di.modules
 
 import com.example.allyourfavouritefilms.data.MainRepository
 import dagger.Module
