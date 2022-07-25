@@ -4,6 +4,7 @@ import com.example.allyourfavouritefilms.DI.modules.DatabaseModule
 import com.example.allyourfavouritefilms.DI.modules.DomainModule
 import com.example.allyourfavouritefilms.DI.modules.RemoteModule
 import com.example.allyourfavouritefilms.viewModel.HomeFragmentViewModel
+import com.example.allyourfavouritefilms.viewModel.SettingsFragmentViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,4 +20,6 @@ import javax.inject.Singleton
 interface AppComponent {
     //метод для того, чтобы появилась внедрять зависимости в HomeFragmentViewModel
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
+
+    fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
 }

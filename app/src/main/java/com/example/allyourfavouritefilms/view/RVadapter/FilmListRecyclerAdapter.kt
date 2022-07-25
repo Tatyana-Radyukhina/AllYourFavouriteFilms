@@ -101,7 +101,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener):Re
         fun click(film: Film)
     }*/
 
-    private val items = mutableListOf<Film>()
+    val items = mutableListOf<Film>()
 
     //Этот метод нужно переопределить на возврат количества елементов в списке RV
     override fun getItemCount() = items.size

@@ -16,6 +16,7 @@ import com.example.allyourfavouritefilms.databinding.FragmentHomeBinding
 import com.example.allyourfavouritefilms.domain.Film
 import com.example.allyourfavouritefilms.utils.AnimationHelper
 import com.example.allyourfavouritefilms.viewModel.HomeFragmentViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -41,6 +42,11 @@ class HomeFragment : Fragment() {
             filmsAdapter.addItems(field)
         }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,17 +67,34 @@ class HomeFragment : Fragment() {
         )
 
         initSearchView()
+        initPullToRefresh()
 
         //находим наш RV
         initRecycler()
         //Кладем нашу БД в RV
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
             filmsDataBase = it
+            filmsAdapter.addItems(it)
         })
 
     }
 
+    private fun initPullToRefresh() {
+        //Вешаем слушатель, чтобы вызвался pull to refresh
+        binding.pullToRefresh.setOnRefreshListener {
+            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+            filmsAdapter.items.clear()
+            //Делаем новый запрос фильмов на сервер
+            viewModel.getFilms()
+            //Убираем крутящиеся колечко
+            binding.pullToRefresh.isRefreshing = false
+        }
+    }
+
     private fun initSearchView() {
+        search_view.setOnClickListener {
+            search_view.isIconified = false
+        }
         //Подключаем слушателя изменений введенного текста в поиска
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
@@ -125,6 +148,13 @@ class HomeFragment : Fragment() {
         /*filmsAdapter.addItems(filmsDataBase)*/
 
 }
+
+
+
+
+/*viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+    filmsDataBase = it
+})*/
 
 
 

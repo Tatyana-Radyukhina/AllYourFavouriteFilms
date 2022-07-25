@@ -3,6 +3,9 @@ package com.example.allyourfavouritefilms
 import android.app.Application
 import com.example.allyourfavouritefilms.DI.AppComponent
 import com.example.allyourfavouritefilms.DI.DaggerAppComponent
+import com.example.allyourfavouritefilms.DI.modules.DatabaseModule
+import com.example.allyourfavouritefilms.DI.modules.DomainModule
+import com.example.allyourfavouritefilms.DI.modules.RemoteModule
 
 import com.example.allyourfavouritefilms.data.ApiConstants
 import com.example.allyourfavouritefilms.data.MainRepository
@@ -69,7 +72,11 @@ class App : Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
-        dagger = DaggerAppComponent.create()
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {
