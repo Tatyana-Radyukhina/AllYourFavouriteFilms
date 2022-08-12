@@ -1,5 +1,6 @@
 package com.example.allyourfavouritefilms.domain
 
+import androidx.lifecycle.LiveData
 import com.example.allyourfavouritefilms.data.*
 import com.example.allyourfavouritefilms.data.Entity.TmdbResults
 import com.example.allyourfavouritefilms.utils.Converter
@@ -18,9 +19,9 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
                 //Кладем фильмы в бд
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
                 }
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -36,5 +37,5 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
 
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDb()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 }
