@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -59,6 +60,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
+            binding.progressBar.isVisible = it
+        })
+
 
         AnimationHelper.performFragmentCircularRevealAnimation(
             binding.homeFragmentRoot,
@@ -146,6 +153,8 @@ class HomeFragment : Fragment() {
         }
 //Кладем нашу БД в RV
         /*filmsAdapter.addItems(filmsDataBase)*/
+
+
 
 }
 
